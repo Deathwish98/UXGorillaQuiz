@@ -1,0 +1,31 @@
+<footer class="footer container-fluid">
+  <div class="row footer-top-margin" *ngIf="QService.get_Qind() < QService.get_Questions().length">
+    <div class="col d-none d-sm-block">
+      Question {{ Qindex + 1}} / 38
+    </div>
+    <div *ngIf="Shared.showNextQuestionButton; then NextQ else SkipSubmitQ"></div>
+    <ng-template #SkipSubmitQ>
+      <div class="col d-sm-none">
+        <a id="alternate-skip-button" class="skip-button">Skip Question</a>
+      </div>
+      <div class="col text-right">
+        <a class="skip-button main-skip-button" (click)="SkipQuestion()">Skip Question</a>
+        <button class="btn btn-primary" (click)="OnCheckButtonClick()">Check Answer</button>
+      </div>
+    </ng-template>
+    <ng-template #NextQ>
+      <div class="col text-right">
+        <div *ngIf="QService.get_Qind() == QService.get_Questions().length-1;then ResultsBtn else NextBtn"></div>
+        <ng-template #NextBtn>
+          <button class="btn btn-primary next-question bounce" (click)="GoToNextQuestion()">Next Question</button>
+        </ng-template>
+        <ng-template #ResultsBtn>
+          <button class="btn btn-primary next-question bounce"
+                  (click)="ShowResultPage()" >See Results</button>
+        </ng-template>
+      </div>
+    </ng-template>
+  </div>
+</footer>
+
+

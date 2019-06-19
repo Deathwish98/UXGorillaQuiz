@@ -1,0 +1,59 @@
+<main role="main" class="container align-middle">
+  <div *ngIf="QService.get_Qind() < QService.get_Questions().length; then Questions else Result"></div>
+  <ng-template #Questions>
+    <div role="quiz" class="row">
+      <div class="col col-md-8 offset-md-2" >
+        <div class="question-number">
+          Question {{ QService.get_Qind() + 1}} :
+        </div>
+        <div class="error-message" *ngIf="Shared.showIncorrectRibbon">
+          <div role="alert" class="alert alert-danger fade show">
+            <strong>Incorrect!</strong> Your answer was incorrect
+            <button type="button" data-dismiss="alert" aria-label="Close" class="close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+        </div>
+        <div class="success-message" *ngIf="Shared.showCorrectRibbon">
+          <div role="alert" class="alert alert-success fade show">
+            <strong>Correct!</strong> {{ QService.get_Questions()[QService.get_Qind()].successMessage}}
+            <button type="button" data-dismiss="alert" aria-label="Close" class="close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+        </div>
+        <div class="question-text" [innerHTML]="QService.get_Questions()[QService.get_Qind()].question"></div>
+        <div class="question-options">
+          <ul>
+            <li *ngFor="let option of QService.get_Questions()[QService.get_Qind()].options; let i = index">
+              <label [htmlFor]=i>
+                <input type="radio" [name]="'object_' + QService.get_Qind()" [id]=i [value]=i
+                       (change)="getSelectedOption(option)">
+                <span>{{ option.label }}</span>
+              </label>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #Result>
+    <div role="result" class="row">
+      <div class="col offset-md-2 col-md-8">
+        <h1>Final result</h1><br>
+        <div class="result-time-taken">
+          <h2>Time Taken: {{ Shared.timer }}</h2>
+        </div>
+        <div class="result-correct">
+          <h2>Correct Answers: <b>{{QService.CorrectAnswers}}</b></h2>
+        </div>
+        <div class="result-incorrect">
+          <h2>Incorrect Answers: <b>{{QService.InCorrectAnswers}}</b></h2>
+        </div> <div class="result-skipped">
+          <h2>Skipped: <b>{{QService.SkippedAnswers}}</b></h2>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</main>
