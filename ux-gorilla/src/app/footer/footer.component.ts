@@ -25,14 +25,16 @@ export class FooterComponent implements OnInit {
       clearInterval(this.Shared.intervalID);
     }
     this.QService.QuestionIndex += 1;
-    this.QService.SkippedAnswers += 1;
+    this.QService.SkippedAnswers += 1;  
+    this.Shared.selectedOption = null;
   }
 
   GoToNextQuestion() {
     this.Shared.showNextQuestionButton = false;
     this.Shared.showCorrectRibbon = false;
     this.QService.QuestionIndex += 1;
-    this.Shared.firstAttempt = true;
+    this.Shared.firstAttempt = true;    
+    this.Shared.selectedOption = null;
     console.log('I' + this.QService.InCorrectAnswers, 'C' + this.QService.CorrectAnswers, 'S' + this.QService.SkippedAnswers +
     'Qno' + this.QService.QuestionIndex);
   }
