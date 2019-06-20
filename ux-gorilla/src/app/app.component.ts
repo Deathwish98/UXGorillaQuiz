@@ -4,7 +4,7 @@ import {QuestionsComponent} from './questions/questions.component';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: []
 })
 export class AppComponent {
   @ViewChild('QstnComponent', {static: false}) QstnComponent: QuestionsComponent;
