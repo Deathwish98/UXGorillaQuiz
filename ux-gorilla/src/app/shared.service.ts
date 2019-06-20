@@ -26,7 +26,6 @@ export class SharedService {
       seconds = seconds < 10 ? parseInt('0' + seconds, 10) : seconds;
 
       this.timer = minutes + ':' + seconds;
-      console.log(this.timer);
       ++startTime;
     }, 1000);
   }
