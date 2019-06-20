@@ -40,7 +40,6 @@ export class FooterComponent implements OnInit {
   }
 
   OnCheckButtonClick() {
-    console.log(this.Shared.selectedOption);
     if (this.Shared.selectedOption) {
       this.CheckIfAnswerCorrect.emit();
       if (this.Shared.isSelectedRadioCorrect) {
